@@ -17,10 +17,12 @@ root = tk.Tk()
 root.title("No Button")
 root.geometry("300x300")
 
+## Generate No message returned as string
 def generateNo():
     index = random.randint(0, len(dataList) - 1)
     return str(dataList[index])
 
+## Calls generateNo() and sets the GUI to show the no message
 def updateScreen():
     generateNo()
     textArea.config(state=tk.NORMAL)
@@ -28,7 +30,7 @@ def updateScreen():
     textArea.insert(tk.END, generateNo())
     textArea.config(state=tk.DISABLED)
 
-
+## speak_task() is a thread that takes the GUI text and speaks it. speak() is the function to start this thread
 def speak_task():
     try:
         engine = pyttsx3.init()
@@ -41,7 +43,7 @@ def speak_task():
 def speak():
     threading.Thread(target=speak_task, daemon=True).start()
 
-## Elements
+## GUI Elements
 textArea = tk.Text(width=40, height=10, state="disabled", wrap="word")
 noButton = tk.Button(text="No", command=updateScreen)
 speakButton = tk.Button(text="Speak", command=speak)
@@ -54,11 +56,9 @@ speakButton.pack(padx=5, pady=5)
 # Main Loop
 try:
     tk.mainloop()
-
 except KeyboardInterrupt:
     print("Exiting from keyboad interrupt.")
     exit(0)
-
 except Exception as e:
     print(f"An error occurred: {e}")
     exit(1)
