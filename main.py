@@ -5,7 +5,7 @@ import threading
 import filter
 
 print("Loading database...")
-filtered = filter.importData()
+filtered = filter.importData(debug=False)
 dataList = filtered["data"]
 print(f"Loaded {len(dataList)} entries from {filtered["dataPath"]}. Blocked {filtered["amountBlocked"]} from {filtered["blockedPath"]}.")
 
@@ -15,7 +15,7 @@ root.geometry("300x300")
 
 def generateNo():
     index = random.randint(0, len(dataList) - 1)
-    return str(dataList[index])
+    return dataList[index]
 
 def updateScreen():
     generateNo()
@@ -28,7 +28,7 @@ def updateScreen():
 def speak_task(text):
     try:
         engine = pyttsx3.init()
-        engine.setProperty('rate', 150)
+        engine.setProperty('rate', 120)
         engine.stop()
         engine.say(text)
         engine.runAndWait()

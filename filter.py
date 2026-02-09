@@ -4,7 +4,7 @@ dataList = []
 tempDataList = []
 blockedPhrases = []
 
-def importData(filter=True):
+def importData(filter=True, debug=False):
     with open(database, 'r', encoding='utf-8') as file:
         for line in file:
             tempDataList.append(line.strip())
@@ -19,8 +19,10 @@ def importData(filter=True):
                 if tempDataList[x] == blockedPhrases[i]:
                     blocked = True
                     numBlocked = numBlocked + 1
+                    if debug:
+                        print(tempDataList[x] + " \033[33mequil to\033[0m " + blockedPhrases[i] + "\033[33m?\033[0m " + str(tempDataList[x] == blockedPhrases[i]))
             if not blocked:
-                dataList.append(tempDataList[x])    
+                dataList.append(tempDataList[x])
     info = {
         "data": dataList,
         "dataPath": database,
