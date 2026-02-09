@@ -38,17 +38,14 @@ def speak():
     words = textArea.get("1.0", tk.END)
     threading.Thread(target=speak_task(words), daemon=True).start()
 
-## Elements
 textArea = tk.Text(width=40, height=10, state="disabled", wrap="word")
 noButton = tk.Button(text="No", command=updateScreen)
 speakButton = tk.Button(text="Speak", command=speak)
 
-## Place elements
 textArea.pack(padx=10,pady=10)
 noButton.pack(padx=5, pady=5)
 speakButton.pack(padx=5, pady=5)
 
-# Main Loop
 try:
     updateScreen()
     tk.mainloop()
