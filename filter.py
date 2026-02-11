@@ -1,10 +1,14 @@
-database = "database.txt"
-blockedData = "blocked.txt"
+database = "db/database.txt"
+blockedData = "db/blocked.txt"
 dataList = []
 tempDataList = []
 blockedPhrases = []
 
 def importData(filter=True, debug=False):
+    numBlocked = 0
+    dataList.clear()
+    tempDataList.clear()
+    blockedPhrases.clear()
     with open(database, 'r', encoding='utf-8') as file:
         for line in file:
             tempDataList.append(line.strip())
@@ -12,13 +16,12 @@ def importData(filter=True, debug=False):
         with open(blockedData, 'r', encoding='utf-8') as file:
             for line in file:
                 blockedPhrases.append(line.strip())
-        numBlocked = 0
         for x in range(len(tempDataList)):
             blocked = False
             for i in range(len(blockedPhrases)):
                 if tempDataList[x] == blockedPhrases[i]:
                     blocked = True
-                    numBlocked = numBlocked + 1
+                    numBlocked += 1
                     if debug:
                         print(tempDataList[x] + " \033[33mequil to\033[0m " + blockedPhrases[i] + "\033[33m?\033[0m " + str(tempDataList[x] == blockedPhrases[i]))
             if not blocked:
