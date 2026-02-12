@@ -5,7 +5,7 @@ import threading
 import filter
 
 print("Loading database...")
-filtered = filter.importData(debug=False)
+filtered = filter.importData(filter=True, debug=True)
 dataList = filtered["data"]
 print(f"Loaded {len(dataList)} entries from {filtered["dataPath"]}. Blocked {filtered["amountBlocked"]} from {filtered["blockedPath"]}.")
 
@@ -23,7 +23,6 @@ def updateScreen():
     textArea.delete("1.0", tk.END)
     textArea.insert(tk.END, generateNo())
     textArea.config(state=tk.DISABLED)
-
 
 def speak_task(text):
     try:
@@ -51,7 +50,7 @@ try:
     tk.mainloop()
 
 except KeyboardInterrupt:
-    print("Exiting from keyboad interrupt.")
+    print("Exiting from keyboard interrupt.")
     exit(0)
 
 except Exception as e:
