@@ -1,4 +1,4 @@
-database = "db/database.txt"
+database = "db/database.txt" # Database contents from hotheadhacker/no-as-a-service (https://github.com/hotheadhacker/no-as-a-service)
 blockedData = "db/blocked.txt"
 dataList = []
 tempDataList = []
